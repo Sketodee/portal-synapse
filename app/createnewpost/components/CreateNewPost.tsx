@@ -1,62 +1,67 @@
 'use client'
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@/app/component/Button';
 import { BsEyeSlash } from 'react-icons/bs';
-import { IoCalendarClearOutline } from 'react-icons/io5';
 import { TbSend } from 'react-icons/tb';
 import BlogPostForm, {
   BlogPostFormHandle,
 } from './BlogPostForm';
+import { PostStatus } from '@/types/appTypes';
 
 const CreateNewPost: React.FC = () => {
+
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submittingStatus, setSubmittingStatus] = useState<null | PostStatus>(null);
+
   const formRef = useRef<BlogPostFormHandle>(null);
 
-  const handleExternalSubmit = (data: any) => {
-    console.log('Form data from BlogPostForm:', data);
-    // You can add logic based on which action was triggered (e.g., publish/draft)
-  };
+//   const handleExternalSubmit = (data: any) => {
+//     // console.log(data)
+//     // You can add logic based on which action was triggered (e.g., publish/draft)
+//   };
 
-  const handleSubmit = (actionType: 'draft' | 'schedule' | 'publish') => {
-    console.log(`Triggering form submit for: ${actionType}`);
-    formRef.current?.submitForm();
+  const handleSubmit = (status: PostStatus) => {
+    formRef.current?.submitForm(status);
+    setSubmittingStatus(status);
   };
 
   return (
     <div className="w-[80%] mx-auto px-2">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-bold">Create New Post</h2>
+        <h2 className="text-2xl font-bold">Create New Post</h2>   
         <div className="flex space-x-2">
           <Button
-            text="Save as Draft"
+             text={isSubmitting && submittingStatus === PostStatus.Draft ? "Saving..." : "Save as Draft"}
             icon={BsEyeSlash}
             bgColor="bg-white"
             textColor="text-black"
             className="border border-gray-300"
-            onClick={() => handleSubmit('draft')}
+            onClick={() => handleSubmit(PostStatus.Draft)}
           />
           <Button
-            text="Schedule"
-            icon={IoCalendarClearOutline}
-            bgColor="bg-white"
-            textColor="text-black"
-            className="border border-gray-300"
-            onClick={() => handleSubmit('schedule')}
-          />
-          <Button
-            text="Publish"
+            text={isSubmitting && submittingStatus === PostStatus.Publish ? "Publishing..." : "Publish"}
             icon={TbSend}
             bgColor="bg-gray-900"
             textColor="text-white"
             className="border border-gray-300"
-            onClick={() => handleSubmit('publish')}
+            onClick={() => handleSubmit(PostStatus.Publish)}
           />
         </div>
       </div>
 
-      <BlogPostForm ref={formRef} onExternalSubmit={handleExternalSubmit} />
+      <BlogPostForm ref={formRef} isSubmitting={isSubmitting} setIsSubmitting={setIsSubmitting}  />
     </div>
   );
 };
 
 export default CreateNewPost;
+
+{/* <Button
+            text="Schedule"
+            icon={IoCalendarClearOutline}
+            bgColor="bg-white"
+            textColor="text-black"
+            className="border border-gray-300"
+            onClick={() => handleSubmit(PostStatus.Schedule)}
+          /> */}

@@ -1,10 +1,12 @@
-import LoginPage from "./component/LoginPage";
+import AllBlogPost from "./component/AllBlogPost";
+import HomePage from "./component/HomePage";
 
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-2 ">
-     <h2>Welcome to Home Page</h2>
+    <div className="py-5 ">
+     <HomePage />
+     <AllBlogPost />
     </div>
   );
 }

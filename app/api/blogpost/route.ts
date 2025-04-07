@@ -13,15 +13,15 @@ export const POST = async (request: Request): Promise<NextResponse> => {
       await connectDb();
   
       // Create and save a new product
-    //   await BlogPost.create(body)
+      await BlogPost.create(body)
   
       return new NextResponse(
-        JSON.stringify({ message: "Product added successfully"}),
+        JSON.stringify({ message: "Post created successfully"}),
         { status: 201 }
       );
 
     } catch (error: any) {
       console.log(error)
-      return new NextResponse(JSON.stringify({message: "Error adding product: " }) ,{ status: 500 });
+      return new NextResponse(JSON.stringify({message: "Error creating blog post: " }) ,{ status: 500 });
     }
   };

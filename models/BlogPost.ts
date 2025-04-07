@@ -1,3 +1,4 @@
+import { PostStatus } from "@/types/appTypes";
 import mongoose from "mongoose";
 
 interface IBlogPost extends Document {
@@ -10,7 +11,7 @@ interface IBlogPost extends Document {
     readTime: string;
     seoTitle: string;
     seoDescription: string;
-    status: 'Draft' | 'Published' ;
+    status: PostStatus ;
   }
 
 

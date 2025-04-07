@@ -1,18 +1,20 @@
 'use client'
 
-import React, { useState, ChangeEvent, FormEvent, forwardRef, useImperativeHandle } from 'react';
+import React, { useState, ChangeEvent, forwardRef, useImperativeHandle } from 'react';
 
 import dynamic from 'next/dynamic'
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import Button from '@/app/component/Button';
+import { PostStatus } from '@/types/appTypes';
 
 type Props = {
-    onExternalSubmit: (data: any) => void;
-  };
-  
+    isSubmitting: boolean;
+    setIsSubmitting: (value: boolean) => void;
+};
+
   export type BlogPostFormHandle = {
-    submitForm: () => void;
+    submitForm: (status?: PostStatus) => void;
   };
   
 // Define interfaces for form data and errors
@@ -57,7 +59,7 @@ const categories = [
     { id: 'Travel', name: 'Travel' }
 ];
 
-const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ onExternalSubmit }, ref) => {
+const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({isSubmitting, setIsSubmitting}, ref,) => {
     // Form state
     const [formData, setFormData] = useState<FormData>({
         title: '',
@@ -91,7 +93,7 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ onExternalSubmit }
     });
 
     // Loading state for submit button
-    const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+    // const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -184,14 +186,6 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ onExternalSubmit }
         setImagePreview(null);
     };
 
-    // // Handle status change
-    // const handleStatusChange = (status: FormData['status']): void => {
-    //     setFormData({
-    //         ...formData,
-    //         status
-    //     });
-    // };
-
 
     // Validate the form
     const validateForm = (): boolean => {
@@ -266,31 +260,53 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ onExternalSubmit }
 
     // Handle form submission
     // const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-        const handleSubmit = (e?: React.FormEvent) => {
+        const handleSubmit = async (e?: React.FormEvent, status?: string) => {
             if (e) e.preventDefault();
 
         if (validateForm()) {
             setIsSubmitting(true);
 
             // Call the external submit function if provided
-            if (onExternalSubmit) {
-                onExternalSubmit(formData);
-              }
+            const updatedData = { ...formData, status };
+            console.log(updatedData)
+            // onExternalSubmit(updatedData);
 
-            // Simulate API call
-            setTimeout(() => {
-                // Log the form data to console
-                console.log('Form submitted:', formData);
+            try {
+                const response = await fetch("/api/blogpost", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(updatedData),
+                });
+    
+                const data = await response.json();
+                
+    
+                if (!response.ok) {
+                    // setMessage({ type: "error", text: "Something went wrong" });
+                    console.log("Something went wrong");
+                }
+    
+            } catch (error: any) {
+                // setMessage({ type: "error", text: error.message });
+                console.log(error.message);
+            }
+            finally {
                 setIsSubmitting(false);
+            }
+           
+            
+            // Simulate API call
+            // setTimeout(() => {
+            //     setIsSubmitting(false);
 
-                // Optional: Reset form after successful submission
-                // setFormData({ title: '', excerpt: '', content: '' });
-            }, 1000);
+            //     // Optional: Reset form after successful submission
+            //     // setFormData({ title: '', excerpt: '', content: '' });
+            // }, 1000);
         }
     };
 
     useImperativeHandle(ref, () => ({
-        submitForm: handleSubmit,
+        submitForm: (status?: PostStatus) => handleSubmit(undefined, status),
       }));
 
     // React Quill modules config
@@ -422,23 +438,6 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ onExternalSubmit }
                         </div>
                     </div>
 
-
-                    <div className="flex justify-end">
-                        <Button
-                            type="submit"
-                            text={isSubmitting ? 'Submitting...' : 'Submit Post'}
-                            // onClick={() => setFormData({ ...formData, content: '' })}
-                            className="mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
-                            disabled={isSubmitting} />
-
-                        {/* <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:bg-blue-400 disabled:cursor-not-allowed transition-colors"
-                        >
-                            {isSubmitting ? 'Submitting...' : 'Submit Post'}
-                        </button> */}
-                    </div>
                 </div>
 
                 <div className='w-1/3 font-normal text-base'>
