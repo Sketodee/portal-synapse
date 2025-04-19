@@ -58,7 +58,7 @@ const categories = [
     { id: 'Travel', name: 'Travel' }
 ];
 
-const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ isSubmitting, setIsSubmitting }, ref,) => {
+const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({  setIsSubmitting }, ref,) => {
     // Form state
     const [formData, setFormData] = useState<FormData>({
         title: '',
@@ -277,15 +277,15 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ isSubmitting, setI
                     body: JSON.stringify(updatedData),
                 });
 
-                const data = await response.json();
-
 
                 if (!response.ok) {
                     // setMessage({ type: "error", text: "Something went wrong" });
                     console.log("Something went wrong");
                 }
 
-            } catch (error: any) {
+            } 
+             // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            catch (error: any) {
                 // setMessage({ type: "error", text: error.message });
                 console.log(error.message);
             }

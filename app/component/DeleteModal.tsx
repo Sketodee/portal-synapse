@@ -7,7 +7,7 @@ interface DeleteModalProps {
   onConfirm: () => void;
 }
 
-export default function DeleteModal({ postId, onClose, onConfirm }: DeleteModalProps) {
+export default function DeleteModal({ onClose, onConfirm }: DeleteModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
             <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-lg">

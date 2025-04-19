@@ -267,7 +267,6 @@ export default function EditModal({ data, onClose }: EditModalProps) {
                     body: JSON.stringify(updatedData),
                 });
 
-                const data = await response.json();
      
                 if (!response.ok) {
                     // setMessage({ type: "error", text: "Something went wrong" });
@@ -277,7 +276,9 @@ export default function EditModal({ data, onClose }: EditModalProps) {
                     onClose();
                 }
               
-            } catch (error: any) {
+            } 
+             // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            catch (error: any) {
                 // setMessage({ type: "error", text: error.message });
                 toast.error(error.message);
             }

@@ -20,7 +20,6 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ blogPost }) => {
         method: "DELETE",
       });
 
-      const data = await response.json();
 
       if (!response.ok) {
         // setMessage({ type: "error", text: "Something went wrong" });
@@ -30,7 +29,9 @@ const BlogPostCard: React.FC<BlogPostCardProps> = ({ blogPost }) => {
         setShowModal(false);
       }
 
-    } catch (error: any) {
+    } 
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    catch (error: any) {
       // setMessage({ type: "error", text: error.message });
       toast.error(error.message);
     }
