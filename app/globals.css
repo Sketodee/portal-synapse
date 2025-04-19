@@ -1,3 +1,19 @@
 @import "tailwindcss";
 @import url('https://fonts.cdnfonts.com/css/general-sans');
 
+/* styles/globals.css */
+.blog-content p {
+    @apply text-gray-700;
+  }
+
+  .blog-content strong {
+    @apply text-black;
+  }
+  
+  .blog-content h1 {
+    @apply text-slate-900 text-3xl;
+  }
+  .blog-content h2 {
+    @apply text-slate-800 text-2xl;
+  }
+  

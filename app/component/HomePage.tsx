@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from './Button'
 import { FaPlus } from 'react-icons/fa'
+import Link from 'next/link'
 
 const HomePage = () => {
   return (
@@ -8,13 +9,15 @@ const HomePage = () => {
         <div className="flex justify-between">
         <h2 className="text-2xl font-bold">Blog Management</h2>   
         <div className="flex space-x-2">
-          <Button
-            text= "New Post"
-            icon={FaPlus}
-            bgColor="bg-gray-900"
-            textColor="text-white"
-            className=""
-          />
+          <Link href="/createnewpost">
+            <Button
+              text= "New Post"
+              icon={FaPlus}
+              bgColor="bg-gray-900"
+              textColor="text-white"
+              className=""
+            />
+          </Link>
         </div>
       </div>
     </div>

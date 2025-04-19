@@ -5,7 +5,6 @@ import React, { useState, ChangeEvent, forwardRef, useImperativeHandle } from 'r
 import dynamic from 'next/dynamic'
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
-import Button from '@/app/component/Button';
 import { PostStatus } from '@/types/appTypes';
 
 type Props = {
@@ -13,10 +12,10 @@ type Props = {
     setIsSubmitting: (value: boolean) => void;
 };
 
-  export type BlogPostFormHandle = {
+export type BlogPostFormHandle = {
     submitForm: (status?: PostStatus) => void;
-  };
-  
+};
+
 // Define interfaces for form data and errors
 interface FormData {
     title: string;
@@ -59,7 +58,7 @@ const categories = [
     { id: 'Travel', name: 'Travel' }
 ];
 
-const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({isSubmitting, setIsSubmitting}, ref,) => {
+const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ isSubmitting, setIsSubmitting }, ref,) => {
     // Form state
     const [formData, setFormData] = useState<FormData>({
         title: '',
@@ -260,8 +259,8 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({isSubmitting, setIs
 
     // Handle form submission
     // const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
-        const handleSubmit = async (e?: React.FormEvent, status?: string) => {
-            if (e) e.preventDefault();
+    const handleSubmit = async (e?: React.FormEvent, status?: string) => {
+        if (e) e.preventDefault();
 
         if (validateForm()) {
             setIsSubmitting(true);
@@ -277,15 +276,15 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({isSubmitting, setIs
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(updatedData),
                 });
-    
+
                 const data = await response.json();
-                
-    
+
+
                 if (!response.ok) {
                     // setMessage({ type: "error", text: "Something went wrong" });
                     console.log("Something went wrong");
                 }
-    
+
             } catch (error: any) {
                 // setMessage({ type: "error", text: error.message });
                 console.log(error.message);
@@ -293,21 +292,13 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({isSubmitting, setIs
             finally {
                 setIsSubmitting(false);
             }
-           
-            
-            // Simulate API call
-            // setTimeout(() => {
-            //     setIsSubmitting(false);
 
-            //     // Optional: Reset form after successful submission
-            //     // setFormData({ title: '', excerpt: '', content: '' });
-            // }, 1000);
         }
     };
 
     useImperativeHandle(ref, () => ({
         submitForm: (status?: PostStatus) => handleSubmit(undefined, status),
-      }));
+    }));
 
     // React Quill modules config
     const modules = {

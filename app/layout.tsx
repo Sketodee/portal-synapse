@@ -1,6 +1,7 @@
 import './globals.css';
 import Sidebar from './component/Sidebar';
 import { ReactNode } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 export const metadata = {
   title: 'My Next.js App',
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           
           <main className="flex-1 md:ml-64">
             {children}
+            <ToastContainer />
           </main>
         </div>
       </body>
