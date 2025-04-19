@@ -12,9 +12,6 @@ export const GET = async (request: Request): Promise<NextResponse> => {
     // Connect to the database
     await connectDb();
 
-    const query: any = {};
-
-
     const blogPost = await BlogPost.findById(id)
       .sort({ createdAt: -1, _id: -1 })
 
@@ -32,7 +29,7 @@ export const GET = async (request: Request): Promise<NextResponse> => {
       { status: 200 }
     );
     
-
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.log(error)
     return new NextResponse(JSON.stringify({ message: "Error fetching blog posts: " }), { status: 500 });
@@ -68,6 +65,7 @@ export const DELETE = async (request: Request): Promise<NextResponse> => {
       JSON.stringify({ message: 'Blog post deleted successfully' }),
       { status: 200 }
     );
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error(error);
     return new NextResponse(
@@ -139,6 +137,7 @@ export const POST = async (request: Request): Promise<NextResponse> => {
       }),
       { status: 200 }
     );
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.error("Error updating blog post:", error);
     return new NextResponse(

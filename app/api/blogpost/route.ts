@@ -1,6 +1,6 @@
 import connectDb from "@/lib/db";
 import BlogPost from "@/models/BlogPost";
-import { BlogPostResponse, PostStatus } from "@/types/appTypes";
+import { BlogPostResponse} from "@/types/appTypes";
 import { NextResponse } from "next/server";
 
 export const POST = async (request: Request): Promise<NextResponse> => {
@@ -21,7 +21,9 @@ export const POST = async (request: Request): Promise<NextResponse> => {
       { status: 201 }
     );
 
-  } catch (error: any) {
+  } 
+   // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  catch (error: any) {
     console.log(error)
     return new NextResponse(JSON.stringify({ message: "Error creating blog post: " }), { status: 500 });
   }
@@ -42,6 +44,7 @@ export const GET = async (request: Request): Promise<NextResponse> => {
     // Connect to the database
     await connectDb();
 
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const query: any = {};
 
     // If there's a filter and it's not 'AllPosts', filter by the tag/status/etc.
@@ -80,7 +83,7 @@ export const GET = async (request: Request): Promise<NextResponse> => {
       { status: 200 }
     );
     
-
+ // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     console.log(error)
     return new NextResponse(JSON.stringify({ message: "Error fetching blog posts: " }), { status: 500 });

@@ -58,6 +58,7 @@ const categories = [
     { id: 'Travel', name: 'Travel' }
 ];
 
+// eslint-disable-next-line react/display-name
 const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({  setIsSubmitting }, ref,) => {
     // Form state
     const [formData, setFormData] = useState<FormData>({

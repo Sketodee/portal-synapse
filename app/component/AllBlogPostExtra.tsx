@@ -1,20 +1,12 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import { BiGrid } from "react-icons/bi";
 import { IoList } from "react-icons/io5";
 import { RiResetLeftFill } from "react-icons/ri";
 import { BlogPostResponse, PostStatus } from '@/types/appTypes';
 import BlogPostCard from './BlogPostCard';
-
-// Define types for our data
-interface Item {
-  id: number;
-  title: string;
-  description: string;
-  tag: string;
-}
 
 interface ApiResponse {
   data: BlogPostResponse[];
@@ -117,7 +109,7 @@ const AllBlogPost: React.FC = () => {
 
     // Calculate start and end of shown pages
     let startPage: number = Math.max(2, currentPage - Math.floor(maxVisibleButtons / 2));
-    let endPage: number = Math.min(totalPages - 1, startPage + maxVisibleButtons - 2);
+    const endPage: number = Math.min(totalPages - 1, startPage + maxVisibleButtons - 2);
 
     if (endPage - startPage < maxVisibleButtons - 2) {
       startPage = Math.max(2, endPage - maxVisibleButtons + 2);
