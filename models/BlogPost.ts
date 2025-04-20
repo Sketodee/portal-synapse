@@ -6,7 +6,7 @@ interface IBlogPost extends Document {
     excerpt: string;
     content: string;
     featuredImage: string;
-    category: 'Technology' | 'Business' | 'Health' | 'Lifestyle' | 'Travel';
+    category: 'Partnership' | 'Solar Energy' | 'Wind Farms' | 'Energy Storage' | 'AI and Robotics' | 'HydroElectric';
     tags: string;
     readTime: string;
     seoTitle: string;

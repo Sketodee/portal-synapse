@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import { PostStatus } from '@/types/appTypes';
+import { toast } from 'react-toastify';
 
 type Props = {
     isSubmitting: boolean;
@@ -51,12 +52,14 @@ interface FormErrors {
 
 const categories = [
     { id: '', name: 'Select a category' },
-    { id: 'Technology', name: 'Technology' },
-    { id: 'business', name: 'Business' },
-    { id: 'health', name: 'Health & Wellness' },
-    { id: 'lifestyle', name: 'Lifestyle' },
-    { id: 'Travel', name: 'Travel' }
+    { id: 'Partnership', name: 'Partnership' },
+    { id: 'Solar Energy', name: 'Solar Energy' },
+    { id: 'Wind Farms', name: 'Wind Farms' },
+    { id: 'Energy Storage', name: 'Energy Storage' },
+    { id: 'AI and Robotics', name: 'AI and Robotics' },
+    { id: 'HydroElectric', name: 'HydroElectric' }
 ];
+
 
 // eslint-disable-next-line react/display-name
 const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({  setIsSubmitting }, ref,) => {
@@ -282,13 +285,35 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({  setIsSubmitting }
                 if (!response.ok) {
                     // setMessage({ type: "error", text: "Something went wrong" });
                     console.log("Something went wrong");
+                } else {
+                        //clear form data 
+                        const [formData, setFormData] = useState<FormData>({
+                            title: '',
+                            excerpt: '',
+                            content: '',
+                            featuredImage: null,
+                            // Post settings
+                            category: '',
+                            tags: '',
+                            readTime: '',
+                    
+                            // SEO settings
+                            seoTitle: '',
+                            seoDescription: ''
+                        });
+
+                        //set toast success
+                         toast.success("Post created successfuly");
                 }
+
+                
 
             } 
              // eslint-disable-next-line @typescript-eslint/no-explicit-any
             catch (error: any) {
                 // setMessage({ type: "error", text: error.message });
                 console.log(error.message);
+                 toast.success("Error creating new post");
             }
             finally {
                 setIsSubmitting(false);
