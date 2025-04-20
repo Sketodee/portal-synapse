@@ -287,7 +287,7 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({  setIsSubmitting }
                     console.log("Something went wrong");
                 } else {
                         //clear form data 
-                        const [formData, setFormData] = useState<FormData>({
+                      setFormData({
                             title: '',
                             excerpt: '',
                             content: '',
