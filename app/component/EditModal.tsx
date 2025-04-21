@@ -6,7 +6,6 @@ const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { toast } from 'react-toastify';
-import { IoMdClose } from "react-icons/io";
 import Button from './Button';
 
 interface EditModalProps {
