@@ -27,10 +27,10 @@ const CreateNewPost: React.FC = () => {
   };
 
   return (
-    <div className="w-[80%] mx-auto px-2">
-      <div className="flex justify-between">
+    <div className="w-full lg:w-[90%] mx-auto md:px-2">
+      <div className="text-center md:flex justify-between">
         <h2 className="text-2xl font-bold">Create New Post</h2>   
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 justify-center mt-2 md:mt-0">
           <Button
              text={isSubmitting && submittingStatus === PostStatus.Draft ? "Saving..." : "Save as Draft"}
             icon={BsEyeSlash}

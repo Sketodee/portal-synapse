@@ -67,7 +67,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
     return (
         <div className="p-4">
 
-            <div className='w-[80%] mx-auto border border-gray-200 rounded-lg p-6'>
+            <div className='w-[95%] w-[80%] mx-auto border border-gray-200 rounded-lg p-2  md:p-6'>
                 <div className="w-full h-48 lg:h-96 order-2 pb-4">
                     <Image
                         src={data.featuredImage}

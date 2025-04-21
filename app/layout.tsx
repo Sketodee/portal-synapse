@@ -4,8 +4,8 @@ import { ReactNode } from 'react';
 import { ToastContainer } from 'react-toastify';
 
 export const metadata = {
-  title: 'My Next.js App',
-  description: 'App with responsive sidebar navigation',
+  title: 'Synapse Portal',
+  description: '',
 };
 
 interface RootLayoutProps {

@@ -5,10 +5,10 @@ import Link from 'next/link'
 
 const HomePage = () => {
   return (
-    <div className='w-[80%] mx-auto px-2'>
-        <div className="flex justify-between">
-        <h2 className="text-2xl font-bold">Blog Management</h2>   
-        <div className="flex space-x-2">
+    <div className='w-full md:w-[80%] mx-auto px-2'>
+        <div className="md:flex justify-between">
+        <h2 className="text-2xl font-bold text-center">Blog Management</h2>   
+        <div className="flex space-x-2 justify-center mt-2 md:mt-0">
           <Link href="/createnewpost">
             <Button
               text= "New Post"

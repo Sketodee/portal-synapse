@@ -170,10 +170,10 @@ const AllBlogPost: React.FC = () => {
 
   return (
     <div className="py-5">
-      <div className="w-[80%] mx-auto border border-gray-200 rounded-lg p-6">
+      <div className="w-[95%] lg:w-[80%] mx-auto border border-gray-200 rounded-lg p-2 md:p-6">
         <h1 className="text-2xl font-bold mb-6 text-gray-800">Items List</h1>
 
-        <div className='flex items-center justify-between w-full border-b border-gray-200 pb-2'>
+        <div className='md:flex items-center justify-between w-full border-b border-gray-200 pb-2'>
           <div className="relative flex-grow max-w-xl ">
             <input
               type="text"
