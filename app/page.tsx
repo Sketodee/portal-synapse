@@ -1,9 +1,12 @@
+import AllBlogPostExtra from "./component/AllBlogPostExtra";
+import HomePage from "./component/HomePage";
 
 
 export default function Home() {
   return (
- <div  className="text-2xl text-center">
-  hey there
- </div>
+    <div className="py-5 ">
+     <HomePage />
+     <AllBlogPostExtra />
+    </div>
   );
 }
