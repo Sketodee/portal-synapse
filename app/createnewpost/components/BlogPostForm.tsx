@@ -341,7 +341,7 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ setIsSubmitting },
         <div className="py-5 px-4 md:px-6 lg:px-10">
             <form onSubmit={handleSubmit} className="flex flex-col lg:flex-row gap-4">
                 {/* Main Content Area */}
-                <div className="bg-white rounded-lg border border-gray-200 p-6 w-full lg:w-2/3">
+                <div className="bg-white rounded-lg border border-gray-200 p-2 md:p-6 w-full lg:w-2/3">
                     {/* Title */}
                     <div className="mb-4">
                         <label htmlFor="title" className="block text-sm text-gray-700 mb-1">Title</label>
@@ -434,7 +434,7 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ setIsSubmitting },
                 {/* Sidebar Section */}
                 <div className="w-full lg:w-1/3 font-normal text-base space-y-6">
                     {/* Post Settings */}
-                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                    <div className="bg-white rounded-lg border border-gray-200 p-2 md:p-6">
                         <h2 className="text-lg font-medium mb-4">Post Settings</h2>
 
                         {/* Category */}
@@ -495,7 +495,7 @@ const BlogPostForm = forwardRef<BlogPostFormHandle, Props>(({ setIsSubmitting },
                     </div>
 
                     {/* SEO Settings */}
-                    <div className="bg-white rounded-lg border border-gray-200 p-6">
+                    <div className="bg-white rounded-lg border border-gray-200 p-2 md:p-6">
                         <h2 className="text-lg font-medium mb-4">SEO Settings</h2>
 
                         {/* SEO Title */}

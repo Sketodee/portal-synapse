@@ -5,8 +5,9 @@ import { ChangeEvent, useState } from 'react';
 const ReactQuill = dynamic(() => import('react-quill-new'), { ssr: false })
 import 'react-quill-new/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
-import Button from './Button';
 import { toast } from 'react-toastify';
+import { IoMdClose } from "react-icons/io";
+import Button from './Button';
 
 interface EditModalProps {
     data: BlogPostResponse;
@@ -258,7 +259,7 @@ export default function EditModal({ data, onClose }: EditModalProps) {
 
             // Call the external submit function if provided
             const updatedData = { ...formData, status: data.status, _id: data._id };
-  
+
 
             try {
                 const response = await fetch("/api/singleblogpost", {
@@ -267,7 +268,7 @@ export default function EditModal({ data, onClose }: EditModalProps) {
                     body: JSON.stringify(updatedData),
                 });
 
-     
+
                 if (!response.ok) {
                     // setMessage({ type: "error", text: "Something went wrong" });
                     console.log("Something went wrong");
@@ -275,9 +276,9 @@ export default function EditModal({ data, onClose }: EditModalProps) {
                     toast.success("Post updated successfuly");
                     onClose();
                 }
-              
-            } 
-             // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
+            }
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             catch (error: any) {
                 // setMessage({ type: "error", text: error.message });
                 toast.error(error.message);
@@ -301,13 +302,13 @@ export default function EditModal({ data, onClose }: EditModalProps) {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
-            <div className="bg-white rounded-lg p-6 w-full max-w-[50%] shadow-lg h-[80vh] overflow-y-auto">
+         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(0,0,0,0.3)]">
+             <div className="bg-white rounded-lg p-2 md:p-6 w-full sm:w-[90%] md:max-w-[90%] lg:max-w-[60%] shadow-lg max-h-[90vh] overflow-y-auto">
                 <h2 className="text-xl font-bold mb-4">Edit Post</h2>
 
-                <form className='flex space-x-2'>
+                <form className='md:flex md:space-x-2'>
 
-                    <div className='bg-white rounded-lg border border-gray-200 p-6 w-2/3'>
+                    <div className='bg-white rounded-lg border border-gray-200 p-2 md:p-6 md:w-2/3'>
                         <div className="mb-4">
                             <label htmlFor="title" className="block text-sm  text-gray-700 mb-1">
                                 Title
@@ -423,11 +424,11 @@ export default function EditModal({ data, onClose }: EditModalProps) {
 
                     </div>
 
-                    <div className='w-1/3 font-normal text-base'>
+                    <div className='md:w-1/3 font-normal text-base'>
                         {/* Sidebar for settings */}
-                        <div className="md:col-span-1 space-y-6">
+                        <div className="md:col-span-1 md:space-y-6">
                             {/* Post Settings */}
-                            <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <div className="bg-white rounded-lg border border-gray-200 p-2 md:p-6">
                                 <h2 className="text-lg font-medium mb-4">Post Settings</h2>
 
 
@@ -504,7 +505,7 @@ export default function EditModal({ data, onClose }: EditModalProps) {
                             </div>
 
                             {/* SEO Settings */}
-                            <div className="bg-white rounded-lg border border-gray-200 p-6">
+                            <div className="bg-white rounded-lg border border-gray-200 p-2 md:p-6">
                                 <h2 className="text-lg font-medium mb-4">SEO Settings</h2>
 
                                 {/* SEO Title */}
